@@ -46,9 +46,9 @@ async function loadApod(d = null) {
     apodDateInfo.textContent = longDate;
     inputDate.textContent = formattedDate;
     apodMediaType.textContent = data.media_type;
-    apodCopyright.textContent = data.copyright
-      ? `© ${data.copyright}`
-      : "© NASA";
+    apodCopyright.innerHTML = data.copyright
+      ? `&copy; ${data.copyright}`
+      : "&copy; NASA";
 
     if (data.media_type === "image") {
       apodImage.src = data.url;
