@@ -221,35 +221,6 @@ async function loadPlanets() {
   }
 }
 
-function updateFacts(planet) {
-  const facts = [];
-
-  if (planet.moons?.length) {
-    facts.push(`${planet.moons.length} known moons`);
-  }
-
-  if (planet.gravity) {
-    facts.push(`Surface gravity: ${planet.gravity} m/s²`);
-  }
-
-  if (planet.avgTemp) {
-    facts.push(`Average temperature: ${planet.avgTemp - 273}°C`);
-  }
-
-  const ul = document.querySelector("#planet-facts");
-  ul.innerHTML = "";
-
-  facts.forEach((fact) => {
-    const li = document.createElement("li");
-    li.className = "flex items-start";
-    li.innerHTML = `
-      <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
-      <span class="text-slate-300">${fact}</span>
-    `;
-    ul.appendChild(li);
-  });
-}
-
 function setPlanet(planet) {
   const id = planet.englishName.toLowerCase();
 
@@ -333,6 +304,35 @@ function setPlanet(planet) {
     : "N/A";
 }
 
+function updateFacts(planet) {
+  let factsList = [];
+
+  if (planet.moons?.length) {
+    factsList.push(`${planet.moons.length} known moons`);
+  }
+
+  if (planet.gravity) {
+    factsList.push(`Surface gravity: ${planet.gravity} m/s²`);
+  }
+
+  if (planet.avgTemp) {
+    factsList.push(`Average temperature: ${planet.avgTemp - 273}°C`);
+  }
+
+  let list = document.querySelector("#planet-facts");
+  list.innerHTML = "";
+
+  factsList.forEach((fact) => {
+    let item = document.createElement("item");
+    item.className = "flex items-start";
+    item.innerHTML = `
+      <i class="fas fa-check text-green-400 mt-1 mr-2"></i>
+      <span class="text-slate-300">${fact}</span>
+    `;
+    list.appendChild(item);
+  });
+}
+
 navButtons.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -352,9 +352,11 @@ navButtons.forEach((btn) => {
     btn.classList.add("bg-blue-500/10", "text-blue-400");
   });
 });
+
 dateInput.addEventListener("input", () => {
   loadApod(dateInput.value);
 });
+
 loadDateBtn.addEventListener("click", () => {
   loadApod(dateInput.value);
 });
@@ -380,6 +382,7 @@ viewBtn.addEventListener("click", (e) => {
 document.querySelector("#sidebar-toggle").addEventListener("click", () => {
   document.querySelector("#sidebar").classList.toggle("sidebar-mobile");
 });
+
 document.addEventListener("click", ({ target }) => {
   let toggleBtn = document.querySelector("#sidebar-toggle");
   let sidebar = document.querySelector("#sidebar");
