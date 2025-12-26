@@ -304,6 +304,7 @@ function setPlanet(planet) {
     : "N/A";
 }
 
+
 function updateFacts(planet) {
   let factsList = [];
 
@@ -373,15 +374,19 @@ document.querySelectorAll(".planet-card").forEach((card) => {
     setPlanet(planet);
   });
 });
+
+
 viewBtn.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
   window.open(highResolutionImage, "_blank");
 });
 
+
 document.querySelector("#sidebar-toggle").addEventListener("click", () => {
   document.querySelector("#sidebar").classList.toggle("sidebar-mobile");
 });
+
 
 document.addEventListener("click", ({ target }) => {
   let toggleBtn = document.querySelector("#sidebar-toggle");
